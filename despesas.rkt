@@ -18,7 +18,7 @@
       (empty? lista)
       lista
       (if
-         (equal? (despesa-nome (first lista)) (nome-despesa))
+         (equal? (despesa-nome (first lista)) nome-despesa)
          (rest lista)
          (cons (first lista) (remove-despesa (rest lista) nome-despesa))
       )
@@ -34,7 +34,7 @@
 (define lista2 (adiciona-despesa lista1 despesa2))
 (define lista3 (adiciona-despesa lista2 (despesa 3 3 3)))
 (display lista3) (newline)
-;;(remove-despesa lista3 2)
+(remove-despesa lista3 2)
 (define listab1 (list 1))
 (define listab2 (adiciona-despesa listab1 2))
 (display listab2)
