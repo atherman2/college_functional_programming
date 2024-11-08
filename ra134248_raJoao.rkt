@@ -65,7 +65,7 @@
    (display "   Prazo(data):")(newline)(define prazo (read-line))
    (display "   Já foi paga?(S/N)")(newline)(define status (read-line))
 
-   (define despesa
+   (define despesa-a-adicionar
       (despesa id valor prazo
          (if (equal? (string-upcase status) "S")
             #t
@@ -74,7 +74,7 @@
       )
    )
 
-   (adiciona-despesa lista despesa)
+   (adiciona-despesa lista despesa-a-adicionar)
 )
 
 
@@ -97,7 +97,7 @@
    (display "Despesa #")(display (despesa-id despesa))(newline)
    (display "   Valor: ")(display (despesa-valor despesa))(newline)
    (display "   Prazo: ")(display (despesa-valor despesa))(newline)
-   (display "   Status: ")(if (despesa-status despesa) "Paga" "A pagar")(newline)
+   (display "   Status: ")(display (if (despesa-status despesa) "Paga" "A pagar"))(newline)
 )
 
 (define (main lista-atual)
