@@ -52,7 +52,6 @@
          (cons (first lista) (remove-despesa (rest lista) nome-despesa))
       )
    )
-
 )
 
 
@@ -150,6 +149,6 @@
    )
 )
 
-(define l1 (list (despesa "1" 1 "" #f) (despesa "2" 2 "" #t) (despesa "3" 3 "" #t) (despesa "4" 4 "" #f) (despesa "5" 5 "" #f) (despesa "6" 6 "" #f) (despesa "7" 7 "" #t)))
+(define l1 (list (despesa "1" "1" "" #f) (despesa "2" "2" "" #t) (despesa "3" "3" "" #t) (despesa "4" "4" "" #f) (despesa "5" "5" "" #f) (despesa "6" "6" "" #f) (despesa "7" "7" "" #t)))
 (main l1)
 (display (despesa-id (first l1)))
