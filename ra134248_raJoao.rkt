@@ -69,13 +69,20 @@
 
 
 
+(define (menu-filtrar lista)
+   (display "Insira 1 para filtrar por despesas pagas - (1) ou 2 para filtrar por despesas pendentes - (2)")(newline)(define opcao (read-line))
+   (visualizar-lista (filtra-registros lista (equal? opcao "1")))
+   lista
+)
+
+
 
 
 (define (menu-remover lista)
    (display "Informe o ID da despesa a ser removida:")(newline)(define id-a-remover (read-line))
    (visualizar-despesa (busca-despesa lista id-a-remover))
    (display "   Confirma a remoção da despesa exibida?(S/N)")(newline)(define opcao (read-line))
-   (if (equal? (string-upcase opcao) "S") (main (remove-despesa lista id-a-remover)) (main lista))
+   (if (equal? (string-upcase opcao) "S") (remove-despesa lista id-a-remover) lista)
 )
 
 
@@ -101,12 +108,15 @@
 
 
 
+(define (visualizar-lista lista)
+      (cond [(not (empty? lista)) (visualizar-despesa (first lista)) (visualizar-lista (rest lista))])
+)
+
+
+
 
 (define (menu-visualizar lista)
    (cond [(empty? lista) (display "- Não há despesas a serem exibidas -")])
-   (define (visualizar-lista lista)
-      (cond [(not (empty? lista)) (visualizar-despesa (first lista)) (visualizar-lista (rest lista))])
-   )
    (visualizar-lista lista)
    (newline)
    lista
@@ -136,6 +146,7 @@
       [(equal? opcao "v") (main (menu-visualizar lista-atual))]
       [(equal? opcao "a") (main (menu-adicionar lista-atual))]
       [(equal? opcao "r") (main (menu-remover lista-atual))]
+      [(equal? opcao "f") (main (menu-filtrar lista-atual))]
    )
 )
 
