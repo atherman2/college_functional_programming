@@ -55,6 +55,32 @@
 
 )
 
+
+
+
+(define (menu-adicionar lista)
+   (display "Informe os dados da despesa a ser adicionada:")(newline)
+   (display "   ID:")(newline)(define id (read-line))
+   (display "   Valor:")(newline)(define valor (read-line))
+   (display "   Prazo(data):")(newline)(define prazo (read-line))
+   (display "   Já foi paga?(S/N)")(newline)(define status (read-line))
+
+   (define despesa
+      (despesa id valor prazo
+         (if (equal? (string-upcase status) "S")
+            #t
+            #f
+         )
+      )
+   )
+
+   (adiciona-despesa lista despesa)
+)
+
+
+
+
+
 (define (menu-visualizar lista)
    (cond [(empty? lista) (display "- Não há despesas a serem exibidas -")])
    (define (visualizar-lista lista)
@@ -77,16 +103,17 @@
 (define (main lista-atual)
    
    (display "Gerenciador de despesas")(newline)
-   (display "Para escolher uma das opções, informe o código correspondente e pressione enter:")(newline)
-   (display "Visualizar despesas: v")(newline)
-   (display "Adicionar despesa: a")(newline)
-   (display "Remover despesa: r")(newline)
-   (display "Filtrar despesas: f")(newline)
+   (display "Para escolher uma das opções, informe o código correspondente:")(newline)
+   (display "   Visualizar despesas: v")(newline)
+   (display "   Adicionar despesa: a")(newline)
+   (display "   Remover despesa: r")(newline)
+   (display "   Filtrar despesas: f")(newline)
    (newline)
    (define opcao (read-line))
 
    (cond
       [(equal? opcao "v") (main (menu-visualizar lista-atual))]
+      [(equal? opcao "a") (main (menu-adicionar lista-atual))]
    )
 )
 
