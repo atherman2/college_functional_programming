@@ -5,10 +5,10 @@
 (define (atualiza-registro lista id-novo-valor)
   (if (empty? lista)
       lista
-      (if (equal? (conta-id (first lista)) id-novo-valor)
+      (if (equal? (despesa-id (first lista)) id-novo-valor)
           (cond
-               [(equal? (conta-status (first lista)) #f) (cons (struct-copy conta (first lista) [status #t]) (rest lista))]
-               [(equal? (conta-status (first lista)) #t) (cons (struct-copy conta (first lista) [status #f]) (rest lista))])
+               [(equal? (despesa-status (first lista)) #f) (cons (struct-copy despesa (first lista) [status #t]) (rest lista))]
+               [(equal? (despesa-status (first lista)) #t) (cons (struct-copy despesa (first lista) [status #f]) (rest lista))])
           (cons (first lista) (atualiza-registro(rest lista) id-novo-valor)))))
 
 
@@ -18,9 +18,10 @@
 (define (filtra-registros lista criterio)
   (if (empty? lista)
       lista
-      (if (equal? (conta-status (first lista)) criterio)
+      (if (equal? (despesa-status (first lista)) criterio)
           (cons (first lista) (filtra-registros (rest lista) criterio))
           (filtra-registros (rest lista) criterio))))
+
 
 
 
@@ -54,4 +55,41 @@
 
 )
 
+(define (menu-visualizar lista)
+   (cond [(empty? lista) (display "- Não há despesas a serem exibidas -")])
+   (define (visualizar-lista lista)
+      (cond [(not (empty? lista)) (visualizar-despesa (first lista)) (visualizar-lista (rest lista))])
+   )
+   (visualizar-lista lista)
+   (newline)
+   lista
+)
+
+
+
+(define (visualizar-despesa despesa)
+   (display "Despesa #")(display (despesa-id despesa))(newline)
+   (display "   Valor: ")(display (despesa-valor despesa))(newline)
+   (display "   Prazo: ")(display (despesa-valor despesa))(newline)
+   (display "   Status: ")(if (despesa-status despesa) "Paga" "A pagar")(newline)
+)
+
+(define (main lista-atual)
+   
+   (display "Gerenciador de despesas")(newline)
+   (display "Para escolher uma das opções, informe o código correspondente e pressione enter:")(newline)
+   (display "Visualizar despesas: v")(newline)
+   (display "Adicionar despesa: a")(newline)
+   (display "Remover despesa: r")(newline)
+   (display "Filtrar despesas: f")(newline)
+   (newline)
+   (define opcao (read-line))
+
+   (cond
+      [(equal? opcao "v") (main (menu-visualizar lista-atual))]
+   )
+)
+
 (define l1 (list (despesa 1 1 "" #f) (despesa 2 2 "" #t) (despesa 3 3 "" #t) (despesa 4 4 "" #f) (despesa 5 5 "" #f) (despesa 6 6 "" #f) (despesa 7 7 "" #t)))
+(main l1)
+(display (despesa-id (first l1)))
