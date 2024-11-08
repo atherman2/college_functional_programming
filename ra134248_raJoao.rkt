@@ -58,6 +58,30 @@
 
 
 
+(define (busca-despesa lista id-buscado)
+    (cond
+       [(not (empty? lista))
+          (cond [(equal? (despesa-id (first lista)) id-buscado) (first lista)]
+                [else (busca-despesa (rest lista) id-buscado)])
+       ]
+    )
+)
+
+
+
+
+
+(define (menu-remover lista)
+   (display "Informe o ID da despesa a ser removida:")(newline)(define id-a-remover (read-line))
+   (visualizar-despesa (busca-despesa lista id-a-remover))
+   (display "   Confirma a remoção da despesa exibida?(S/N)")(newline)(define opcao (read-line))
+   (if (equal? (string-upcase opcao) "S") (main (remove-despesa lista id-a-remover)) (main lista))
+)
+
+
+
+
+
 (define (menu-adicionar lista)
    (display "Informe os dados da despesa a ser adicionada:")(newline)
    (display "   ID:")(newline)(define id (read-line))
@@ -67,10 +91,7 @@
 
    (define despesa-a-adicionar
       (despesa id valor prazo
-         (if (equal? (string-upcase status) "S")
-            #t
-            #f
-         )
+         (equal? (string-upcase status) "S")
       )
    )
 
@@ -97,7 +118,7 @@
    (display "Despesa #")(display (despesa-id despesa))(newline)
    (display "   Valor: ")(display (despesa-valor despesa))(newline)
    (display "   Prazo: ")(display (despesa-valor despesa))(newline)
-   (display "   Status: ")(display (if (despesa-status despesa) "Paga" "A pagar"))(newline)
+   (display "   Status: ")(display (if (despesa-status despesa) "Paga" "Pendente"))(newline)
 )
 
 (define (main lista-atual)
@@ -114,9 +135,10 @@
    (cond
       [(equal? opcao "v") (main (menu-visualizar lista-atual))]
       [(equal? opcao "a") (main (menu-adicionar lista-atual))]
+      [(equal? opcao "r") (main (menu-remover lista-atual))]
    )
 )
 
-(define l1 (list (despesa 1 1 "" #f) (despesa 2 2 "" #t) (despesa 3 3 "" #t) (despesa 4 4 "" #f) (despesa 5 5 "" #f) (despesa 6 6 "" #f) (despesa 7 7 "" #t)))
+(define l1 (list (despesa "1" 1 "" #f) (despesa "2" 2 "" #t) (despesa "3" 3 "" #t) (despesa "4" 4 "" #f) (despesa "5" 5 "" #f) (despesa "6" 6 "" #f) (despesa "7" 7 "" #t)))
 (main l1)
 (display (despesa-id (first l1)))
