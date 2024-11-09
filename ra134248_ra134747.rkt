@@ -89,7 +89,7 @@
  (check-equal? (busca-despesa (list (despesa "a"  100.0 "10/02/2004" #f) (despesa "b" 150.0 "12/08/2024" #t) (despesa "c" 890.0 "29/12/2010" #f)) "a")
                (despesa "a" 100.0 "10/02/2004" #f))
  (check-equal? (busca-despesa (list (despesa "a"  100.0 "10/02/2004" #f) (despesa "b" 150.0 "12/08/2024" #t) (despesa "c" 890.0 "29/12/2010" #f)) "d")
-               "#Erro. Id não encontrado"))
+               "- ERRO: ID NÃO ENCONTRADO -"))
 
 (define (busca-despesa lista id-buscado)
     (cond
@@ -97,9 +97,29 @@
           (cond [(equal? (despesa-id (first lista)) id-buscado) (first lista)]
                 [else (busca-despesa (rest lista) id-buscado)])
        ]
-       [else "#Erro. Id não encontrado"]
+       [else "- ERRO: ID NÃO ENCONTRADO -"]
     )
 )
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+(examples
+ (check-equal? (soma-despesa (list (despesa "a"  100.0 "10/08/2004" #f) (despesa "b" 150.0 "12/08/2004" #t) (despesa "c" 890.0 "29/12/2010" #f)) "18/08/2004")
+               250.0)
+ (check-equal? (soma-despesa (list (despesa "a"  100.0 "10/12/2024" #f) (despesa "b" 150.0 "12/12/2024" #t) (despesa "c" 890.0 "29/12/2024" #f)) "18/12/2024")
+               1140.0))
+
+
+;; falta colocar na main 
+(define (soma-despesa lista prazo)
+  (if (empty? lista) 0
+      (if (equal? (substring (despesa-prazo (first lista)) 3) (substring prazo 3))
+         (+ (despesa-valor (first lista))  (soma-despesa (rest lista) prazo))
+         (soma-despesa (rest lista) prazo))))
+       
+      
+
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -122,7 +142,7 @@
             (display "   Confirma a remoção da despesa exibida?(S/N)")(newline)(define opcao (read-line))
             (if (equal? (string-upcase opcao) "S") (remove-despesa lista id-a-remover) lista)
          ]
-         [else lista]
+         [else (display "- ERRO: ID NÃO ENCONTRADO -")(newline) lista]
    )
 )
 
@@ -171,8 +191,11 @@
 (define (visualizar-despesa despesa)
    (display "Despesa #")(display (despesa-id despesa))(newline)
    (display "   Valor: ")(display (despesa-valor despesa))(newline)
-   (display "   Prazo: ")(display (despesa-valor despesa))(newline)
+   (display "   Prazo: ")(display (despesa-prazo despesa))(newline)
    (display "   Status: ")(display (if (despesa-status despesa) "Paga" "Pendente"))(newline)
+    
+    
+  
 )
 
 
@@ -197,4 +220,8 @@
       [(equal? opcao "f") (main (menu-filtrar lista-atual))]
    )
 )
-
+(define a (despesa "a"  100.0 "10/08/2004" #f))
+(define b (despesa "b" 150.0 "12/08/2004" #t))
+(define c (despesa "c" 890.0 "29/12/2010" #f))
+(define l1 (list a b c))
+(main l1)
