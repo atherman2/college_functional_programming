@@ -136,28 +136,14 @@
       (if (equal? (substring (despesa-prazo (first lista)) 3) (substring prazo 3))
          (+ (despesa-valor (first lista))  (soma-despesa (rest lista) prazo))
          (soma-despesa (rest lista) prazo))))
-       
-      
-
-
+             
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(define (menu-atualizar lista)
-   (display "Informe o ID a ser atualizado:")(newline)(define id-a-ser-atualizado (read-line))
-   (define despesa-a-ser-atualizada (busca-despesa lista id-a-ser-atualizado))
-   (cond [(despesa? despesa-a-ser-atualizada)
-            (visualizar-despesa despesa-a-ser-atualizada)
-            (display "A despesa exibida terá seu valor de status atualizado de ")
-            (if (despesa-status despesa-a-ser-atualizada) (display "paga") (display "pendente"))
-            (display " para ")
-            (if (despesa-status despesa-a-ser-atualizada) (display "pendente") (display "paga"))
-            (newline)(display "Deseja prosseguir?(S/N)")(newline)(define opcao (read-line))
-            (cond [(equal? (string-upcase opcao) "S") (display "- Despesa atualizada com sucesso! -") (newline) (atualiza-registro lista id-a-ser-atualizado)]
-                  [else lista]
-            )
-         ]
-         [else (display "- ERRO: ID NÃO ENCONTRADO -")]
-   )
+(define (menu-total lista)
+   (display "Será exibido o total da soma do valor das despesas com prazo no mês e ano referentes à data informada")(newline)
+   (display "Insira a data:")(newline)(define data (read-line))
+   (display "O valor total da soma das despesas com prazo no mês e ano da data informada é de ") (display (soma-despesa lista data)) (newline)
+   lista
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -249,6 +235,7 @@
    (display "   Remover despesa: rem")(newline)
    (display "   Filtrar despesas: ftr")(newline)
    (display "   Atualizar despesa: atual")(newline)
+   (display "   Visualizar valor total no mês: tot")(newline)
    (newline)
    (define opcao (read-line))
 
@@ -258,8 +245,12 @@
       [(equal? opcao "rem") (main (menu-remover lista-atual))]
       [(equal? opcao "ftr") (main (menu-filtrar lista-atual))]
       [(equal? opcao "atual") (main (menu-atualizar lista-atual))]
+      [(equal? opcao "tot") (main (menu-total lista-atual))]
    )
 )
 
-(define l1 (list (despesa "1" 1 1 #t)(despesa "2" 2 2 #f)(despesa "3" 3 3 #f)(despesa "4" 4 4 #t)(despesa "5" 5 5 #t)(despesa "6" 6 6 #t)(despesa "7" 7 7 #t)))
+(define l1 (list (despesa "1" 1 "01/01/0001" #t)(despesa "2" 2 "01/01/0001" #f)(despesa "3" 3 "01/01/0001" #f)(despesa "4" 4 "01/01/0001" #t)
+                 (despesa "5" 5 "01/01/0001" #t)(despesa "6" 6 "01/01/0001" #t)(despesa "7" 7 "01/01/0001" #t)
+           )
+)
 (main l1)
