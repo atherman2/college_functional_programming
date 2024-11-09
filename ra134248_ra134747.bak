@@ -116,14 +116,9 @@
 
 (define (menu-remover lista)
    (display "Informe o ID da despesa a ser removida:")(newline)(define id-a-remover (read-line))
-   (define despesa-a-remover (busca-despesa lista id-a-remover))
-   (cond [(despesa? despesa-a-remover)
-            (visualizar-despesa despesa-a-remover)
-            (display "   Confirma a remoção da despesa exibida?(S/N)")(newline)(define opcao (read-line))
-            (if (equal? (string-upcase opcao) "S") (remove-despesa lista id-a-remover) lista)
-         ]
-         [else lista]
-   )
+   (visualizar-despesa (busca-despesa lista id-a-remover))
+   (display "   Confirma a remoção da despesa exibida?(S/N)")(newline)(define opcao (read-line))
+   (if (equal? (string-upcase opcao) "S") (remove-despesa lista id-a-remover) lista)
 )
 
 
