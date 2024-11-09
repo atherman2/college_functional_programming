@@ -140,9 +140,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define (menu-total lista)
-   (display "Será exibido o total da soma do valor das despesas com prazo no mês e ano referentes à data informada")(newline)
+   (display "Será exibido o valor total em reais da soma do valor das despesas com prazo no mês e ano referentes à data informada")(newline)
    (display "Insira a data:")(newline)(define data (read-line))
-   (display "O valor total da soma das despesas com prazo no mês e ano da data informada é de ") (display (soma-despesa lista data)) (newline)
+   (display "O valor total em reais da soma das despesas com prazo no mês e ano da data informada é de ") (display (soma-despesa lista data)) (newline)
    lista
 )
 
@@ -179,7 +179,7 @@
 (define (menu-adicionar lista)
    (display "Informe os dados da despesa a ser adicionada:")(newline)
    (display "   ID:")(newline)(define id (read-line))
-   (display "   Valor:")(newline)(define valor (read-line))
+   (display "   Valor em reais:")(newline)(define valor (read))(read-line)
    (display "   Prazo(data):")(newline)(define prazo (read-line))
    (display "   Já foi paga?(S/N)")(newline)(define status (read-line))
 
