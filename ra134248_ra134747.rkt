@@ -103,10 +103,30 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(define (menu-atualizar lista)
+   (display "Informe o ID a ser atualizado:")(newline)(define id-a-ser-atualizado (read-line))
+   (define despesa-a-ser-atualizada (busca-despesa lista id-a-ser-atualizado))
+   (cond [(despesa? despesa-a-ser-atualizada)
+            (visualizar-despesa despesa-a-ser-atualizada)
+            (display "A despesa exibida terá seu valor de status atualizado de ")
+            (if (despesa-status despesa-a-ser-atualizada) (display "paga") (display "pendente"))
+            (display " para ")
+            (if (despesa-status despesa-a-ser-atualizada) (display "pendente") (display "paga"))
+            (newline)(display "Deseja prosseguir?(S/N)")(newline)(define opcao (read-line))
+            (cond [(equal? (string-upcase opcao) "S") (display "- Despesa atualizada com sucesso! -") (newline) (atualiza-registro lista id-a-ser-atualizado)]
+                  [else lista]
+            )
+         ]
+         [else (display "- ERRO: ID NÃO ENCONTRADO -")]
+   )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (define (menu-filtrar lista)
    (display "Insira 1 para filtrar por despesas pagas - (1) ou 2 para filtrar por despesas pendentes - (2)")(newline)(define opcao (read-line))
-   (visualizar-lista (filtra-registros lista (equal? opcao "1")))
+   (define lista-filtrada (filtra-registros lista (equal? opcao "1")))
+   (cond [(empty? lista-filtrada) (display "- Não há despesas a serem exibidas -") (newline)] [else (visualizar-lista lista-filtrada)])
    lista
 )
 
@@ -149,7 +169,6 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; não entendi como funciona isso aqui ;-;
 (define (visualizar-lista lista)
       (cond [(not (empty? lista)) (visualizar-despesa (first lista)) (visualizar-lista (rest lista))])
 )
@@ -183,18 +202,22 @@
    
    (display "Gerenciador de despesas")(newline)
    (display "Para escolher uma das opções, informe o código correspondente:")(newline)
-   (display "   Visualizar despesas: v")(newline)
-   (display "   Adicionar despesa: a")(newline)
-   (display "   Remover despesa: r")(newline)
-   (display "   Filtrar despesas: f")(newline)
+   (display "   Visualizar despesas: vis")(newline)
+   (display "   Adicionar despesa: add")(newline)
+   (display "   Remover despesa: rem")(newline)
+   (display "   Filtrar despesas: ftr")(newline)
+   (display "   Atualizar despesa: atual")(newline)
    (newline)
    (define opcao (read-line))
 
    (cond
-      [(equal? opcao "v") (main (menu-visualizar lista-atual))]
-      [(equal? opcao "a") (main (menu-adicionar lista-atual))]
-      [(equal? opcao "r") (main (menu-remover lista-atual))]
-      [(equal? opcao "f") (main (menu-filtrar lista-atual))]
+      [(equal? opcao "vis") (main (menu-visualizar lista-atual))]
+      [(equal? opcao "add") (main (menu-adicionar lista-atual))]
+      [(equal? opcao "rem") (main (menu-remover lista-atual))]
+      [(equal? opcao "ftr") (main (menu-filtrar lista-atual))]
+      [(equal? opcao "atual") (main (menu-atualizar lista-atual))]
    )
 )
 
+(define l1 (list (despesa "1" 1 1 #t)(despesa "2" 2 2 #f)(despesa "3" 3 3 #f)(despesa "4" 4 4 #t)(despesa "5" 5 5 #t)(despesa "6" 6 6 #t)(despesa "7" 7 7 #t)))
+(main l1)
