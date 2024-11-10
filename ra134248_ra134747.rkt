@@ -1,6 +1,11 @@
 #lang racket
 
 (struct despesa (id valor prazo status) #:transparent)
+;; Despesa representa uma Despesa de uma pessoa.
+;; Id: String - Nome da despesa
+;; Valor: Float - Valor da despesa
+;; Prazo: String - Data de vencimento da despesa
+;; Status: Booleano - Status da depesa #f caso ela esteja pendente, #t caso ela esteja paga.
 
 (require examples)
 
@@ -126,6 +131,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;
+;;
+;;
+;;
+
 (define (menu-atualizar lista)
    (display "Informe o ID a ser atualizado:")(newline)(define id-a-ser-atualizado (read-line))
    (define despesa-a-ser-atualizada (busca-despesa lista id-a-ser-atualizado))
@@ -147,7 +157,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;
-;; Recebe uma lista do tipo despesa e uma string no formato  de data ex: 08/08/2004(dia/mês/ano).
+;; Recebe uma lista do tipo despesa e uma string no formato de data ex: 08/08/2004(dia/mês/ano).
 ;; Retorna a soma de todo o valor das despesas daquele mês específico.
 ;;
 
@@ -167,6 +177,11 @@
              
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;
+;;
+;;
+;;
+
 (define (menu-total lista)
    (display "Será exibido o valor total em reais da soma do valor das despesas com prazo no mês e ano referentes à data informada")(newline)
    (display "Insira a data:")(newline)(define data (read-line))
@@ -175,6 +190,11 @@
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;
+;;
+;;
+;;
 
 (define (menu-filtrar lista)
    (display "Insira 1 para filtrar por despesas pagas - (1) ou 2 para filtrar por despesas pendentes - (2)")(newline)(define opcao (read-line))
@@ -185,7 +205,10 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
+;;
+;; Recebe uma lista do tipo despesa.
+;; 
+;;
 
 (define (menu-remover lista)
    (display "Informe o ID da despesa a ser removida:")(newline)(define id-a-remover (read-line))
@@ -203,6 +226,10 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;
+;;
+;;
+;;
 
 (define (menu-adicionar lista)
    (display "Informe os dados da despesa a ser adicionada:")(newline)
@@ -222,6 +249,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;
+;;
+;;
+;;
+
 (define (visualizar-lista lista)
       (cond [(not (empty? lista)) (visualizar-despesa (first lista)) (visualizar-lista (rest lista))])
 )
@@ -229,6 +261,10 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;
+;;
+;;
+;;
 
 (define (menu-visualizar lista)
    (cond [(empty? lista) (display "- Não há despesas a serem exibidas -")])
@@ -239,6 +275,10 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;
+;; Recebe uma lista do tipo despesa. 
+;; Imprime na tela todas as informações de cada elemento na lista.
+;;
 
 (define (visualizar-despesa despesa)
    (display "Despesa #")(display (despesa-id despesa))(newline)
@@ -253,6 +293,11 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;
+;;
+;;
+;;
 
 (define (main lista-atual)
    
