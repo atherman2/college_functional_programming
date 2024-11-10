@@ -25,9 +25,7 @@
   (if (empty? lista)
       lista
       (if (equal? (despesa-id (first lista)) id-novo-valor)
-          (cond
-               [(equal? (despesa-status (first lista)) #f) (cons (struct-copy despesa (first lista) [status #t]) (rest lista))]
-               [(equal? (despesa-status (first lista)) #t) (cons (struct-copy despesa (first lista) [status #f]) (rest lista))])
+          (cons (struct-copy despesa (first lista) [status (not(despesa-status (first lista))) ]) (rest lista))
           (cons (first lista) (atualiza-registro(rest lista) id-novo-valor)))))
 
 
