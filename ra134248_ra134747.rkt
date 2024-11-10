@@ -7,6 +7,10 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;
+;; Recebe uma lista do tipo despesa e uma string. 
+;; Caso o elemento desejado for encontrado retorna o tipo despesa com seu valor status atualizado. Se receber #t ele retorna #f e vice-versa.
+;;
 
 (examples
  (check-equal? (atualiza-registro (list (despesa "a"  100.0 "10/02/2004" #f) (despesa "b" 150.0 "12/08/2024" #t)) "b") (list (despesa "a" 100.0 "10/02/2004" #f) (despesa "b" 150.0 "12/08/2024" #f)))
@@ -24,6 +28,11 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;
+;; Recebe uma lista do tipo despesa e um booleano. 
+;; Filtrar uma lista e retornar outra lista com todos os elementos filtrados.
+;;
+
 (examples
  (check-equal? (filtra-registros (list (despesa "a"  100.0 "10/02/2004" #f) (despesa "b" 150.0 "12/08/2024" #t) (despesa "c" 890.0 "29/12/2010" #f)) #f)
                (list (despesa "a" 100.0 "10/02/2004" #f) (despesa "c" 890.0 "29/12/2010" #f)))
@@ -40,6 +49,11 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;
+;; Recebe uma lista do tipo despesa e um tipo despesa. 
+;; Adicionar  um elemento do tipo despesa em uma lista e retornar a lista.
+;;
 
 (examples
  (check-equal? (adiciona-despesa (list (despesa "a"  100.0 "10/02/2004" #f) (despesa "b" 150.0 "12/08/2024" #t)) (despesa "c" 890.0 "29/12/2010" #f))
@@ -60,6 +74,10 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;
+;; Recebe uma lista do tipo despesa e um tipo despesa. 
+;; Remove um elemento do tipo despesa de uma lista. 
+;;
 
 (examples
  (check-equal? (remove-despesa (list (despesa "a"  100.0 "10/02/2004" #f) (despesa "b" 150.0 "12/08/2024" #t) (despesa "c" 890.0 "29/12/2010" #f)) "b")
@@ -82,6 +100,11 @@
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;
+;; Recebe uma lista do tipo despesa e uma string. 
+;; Faz uma busca de uma despesa pelo id na lista, e se encontrado retorna a despesa, caso não encontrado retorna um Erro.
+;;
 
 (examples
  (check-equal? (busca-despesa (list (despesa "a"  100.0 "10/02/2004" #f) (despesa "b" 150.0 "12/08/2024" #t) (despesa "c" 890.0 "29/12/2010" #f)) "c")
@@ -122,6 +145,11 @@
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;
+;; Recebe uma lista do tipo despesa e uma string no formato  de data ex: 08/08/2004(dia/mês/ano).
+;; Retorna a soma de todo o valor das despesas daquele mês específico.
+;;
 
 (examples
  (check-equal? (soma-despesa (list (despesa "a"  100.0 "10/08/2004" #f) (despesa "b" 150.0 "12/08/2004" #t) (despesa "c" 890.0 "29/12/2010" #f)) "18/08/2004")
