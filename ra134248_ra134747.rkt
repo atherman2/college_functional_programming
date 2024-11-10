@@ -2,7 +2,7 @@
 
 (struct despesa (id valor prazo status) #:transparent)
 ;; Despesa representa uma Despesa de uma pessoa.
-;; Id: String - Nome da despesa
+;; Id: String - Identificador da despesa
 ;; Valor: Float - Valor da despesa
 ;; Prazo: String - Data de vencimento da despesa
 ;; Status: Booleano - Status da depesa #f caso ela esteja pendente, #t caso ela esteja paga.
@@ -132,8 +132,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;
-;;
-;;
+;; Solicita ao usuário um id para remover da lista recebida como parâmetro
+;; Trata os possíveis erros
 ;;
 
 (define (menu-atualizar lista)
@@ -168,7 +168,6 @@
                1140.0))
 
 
-;; falta colocar na main 
 (define (soma-despesa lista prazo)
   (if (empty? lista) 0
       (if (equal? (substring (despesa-prazo (first lista)) 3) (substring prazo 3))
@@ -178,8 +177,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;
-;;
-;;
+;; Solicita ao usuário uma data
+;; Chama a função soma-despesa passando a data informada e a lista recebida como parâmetro 
 ;;
 
 (define (menu-total lista)
@@ -192,8 +191,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;
-;;
-;;
+;; Solicita ao usuário qual o seu desejo: filtrar por despesas pagas ou pendentes
+;; Chama a função filtra-registros passando a opção do usuário e a lista recebida como parâmetro
 ;;
 
 (define (menu-filtrar lista)
@@ -206,8 +205,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;
-;; Recebe uma lista do tipo despesa.
-;; 
+;; Recebe uma lista do tipo despesa. Solicita ao usuário o ID de uma despesa para removê-la
+;; Após exibir a despesa do ID informado e receber uma confirmação do usuário, chama a função remove despesa passando o id informado e a lista recebida como parâmetro
 ;;
 
 (define (menu-remover lista)
@@ -227,8 +226,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;
-;;
-;;
+;; Registra uma despesa com os dados passados pelo usuário
+;; Chama a função adiciona-despesa passando a despesa registrada e a lista recebida como parâmetro
 ;;
 
 (define (menu-adicionar lista)
@@ -250,7 +249,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;
-;;
+;; Recebe uma lista de objetos do tipo despesa, e, para cada objeto deste tipo na lista, aplica nele a função visualizar despesa
 ;;
 ;;
 
@@ -262,8 +261,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;
-;;
-;;
+;; Chama a função visualizar-lista passando a lista recebida como parâmetro
+;; Caso não hajam elementos na lista, informa ao usuário
 ;;
 
 (define (menu-visualizar lista)
@@ -276,8 +275,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;
-;; Recebe uma lista do tipo despesa. 
-;; Imprime na tela todas as informações de cada elemento na lista.
+;; Recebe um objeto despesa 
+;; Exibe os atributos desse objeto: ID, valor, prazo e status
 ;;
 
 (define (visualizar-despesa despesa)
@@ -294,9 +293,9 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;
-;;
-;;
+;; Coordena todo o código, informando ao usuário suas opções e solicitando uma escolha
+;; Chama um dos menus do código de acordo com a escolha do usuário
+;; Faz a chamada do menu de forma a se iniciar recursivamente passando como parâmetro o retorno do menu adequado
 ;;
 
 (define (main lista-atual)
