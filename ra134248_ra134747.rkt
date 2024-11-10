@@ -5,7 +5,7 @@
 ;; Id: String - Nome da despesa
 ;; Valor: Float - Valor da despesa
 ;; Prazo: String - Data de vencimento da despesa
-;; Status: Booleano - Status da depesa #f caso ela esteja pendente, #t caso ela esteja paga.
+;; Status: Booleano - Status da depesa: #f caso ela esteja pendente, #t caso ela esteja paga.
 
 (require examples)
 
