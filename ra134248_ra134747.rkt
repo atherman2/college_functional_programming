@@ -25,8 +25,11 @@
   (if (empty? lista)
       lista
       (if (equal? (despesa-id (first lista)) id-novo-valor)
-          (cons (struct-copy despesa (first lista) [status (not(despesa-status (first lista))) ]) (rest lista))
-          (cons (first lista) (atualiza-registro(rest lista) id-novo-valor)))))
+          (cons (struct-copy despesa (first lista)
+                   [status (not(despesa-status (first lista))) ])
+                (rest lista))
+          (cons (first lista)
+                (atualiza-registro(rest lista) id-novo-valor)))))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
